@@ -23,7 +23,7 @@ namespace ParkData.Controllers
             return View();
         }
 
-        public IActionResult Search(string param)
+        public IActionResult Search([FromQuery] string param)
         {
             return View("ParkSearch");
         }

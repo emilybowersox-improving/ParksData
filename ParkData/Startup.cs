@@ -50,10 +50,10 @@ namespace ParkData
             {
             endpoints.MapControllerRoute(
                 name: "search",
-                pattern: "parkdata?search={param}",
+                pattern: "parkdata",
                 defaults: new { Controller = "Home", action = "Search" });
-/*
-                `parkdata? search = woods*/
+
+                /* parkdata?search=woods*/
 
 
             endpoints.MapControllerRoute(
