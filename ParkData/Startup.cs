@@ -51,7 +51,7 @@ namespace ParkData
             endpoints.MapControllerRoute(
                 name: "search",
                 pattern: "parkdata",
-                defaults: new { Controller = "Home", action = "Search" });
+                defaults: new { Controller = "Home", action = "ParkSearch" });
 
                 /* parkdata?search=woods*/
 

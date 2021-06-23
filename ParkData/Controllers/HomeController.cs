@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ParkData.Models;
+using ParkData.ViewModels;
 
 namespace ParkData.Controllers
 {
@@ -23,9 +24,17 @@ namespace ParkData.Controllers
             return View();
         }
 
-        public IActionResult Search([FromQuery] string param)
+        public async Task<IActionResult> ParkSearch(string search)
         {
-            return View("ParkSearch");
+            var apiData = new ParkAPI();
+            var myData = await apiData.GetParks();
+
+            var vm = new ParkViewModel
+            {
+                Parks = await apiData.GetParks()
+            };
+
+            return View(vm);
         }
 
         public IActionResult Privacy()

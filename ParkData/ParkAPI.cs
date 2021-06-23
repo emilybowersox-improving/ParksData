@@ -12,17 +12,17 @@ namespace ParkData
 
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        public async Task<string> GetParkName()
+        public async Task<List<Park>> GetParks()
         {
             HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
             response.EnsureSuccessStatusCode();
 
             string responseContent = await response.Content.ReadAsStringAsync();
-            var seleucidResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ParkResponse>(responseContent);
+            var parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
 
 
 
-     /*       return */
+            return parkInfo;
 
 
         }
