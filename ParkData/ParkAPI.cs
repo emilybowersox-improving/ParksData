@@ -28,8 +28,6 @@ namespace ParkData
             HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
             response.EnsureSuccessStatusCode();
 
-            /*       var parkOutput = new List<ParkResponse>();*/
-
             List<Park> parkOutput = new List<Park>();
 
             string responseContent = await response.Content.ReadAsStringAsync();
@@ -37,28 +35,14 @@ namespace ParkData
 
             foreach (Park p in parkInfo)
             {
-                if (p.ParkName.Contains(userQuery)) {
+                if (p.ParkName.ToLower().Contains(userQuery) || p.Description.ToLower().Contains(userQuery))
+                {
                     parkOutput.Add(p);
                 }
             }
 
-            /*            return park.ParkName.Contains(userQuery)).ToList();*/
-
-
+    
             return parkOutput;
         }
     }
 }
-
-
-/*var output = new List<Airport>();
-
-foreach (var airport in airports)
-{
-    if (airport.Name.Contains("Heliport"))
-    {
-        output.Add(airport);
-    }
-}
-
-return output;*/

@@ -8,17 +8,25 @@
     <tr>
         <th>Park ID</th>
         <th>Park Name</th>
-        <th>Sanctuary Name</th>
         <th>Borough</th>
+        <th>Acres</th>
+        <th>Directions</th>
+        <th>Description</th>
+        <th>Habitat Type</th>
+        <th>Sanctuary Name</th>
     </tr>
     @foreach (var park in Model.Parks)
     {
-        <tr>
-            <td>@park.ParkID</td>
-            <td>@park.ParkName</td>
-            <td>@park.SantuaryName</td>
-            <td>@park.Borough</td>
-        </tr>
+<tr>
+    <td>@park.ParkID</td>
+    <td>@park.ParkName</td>
+    <td>@park.Borough</td>
+    <td>@park.Acres</td>
+    <td>@park.Directions</td>
+    <td>@park.Description</td>
+    <td>@park.HabitatType</td>
+    <td>@park.SantuaryName</td>
+</tr>
     }
 
 </table>
