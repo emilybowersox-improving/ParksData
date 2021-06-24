@@ -24,10 +24,10 @@ namespace ParkData.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ParkSearch(string search)
+        public async Task<IActionResult> AllParks()
         {
             var apiData = new ParkAPI();
-            var myData = await apiData.GetParks();
+/*            var myData = await apiData.GetParks();*/
 
             var vm = new ParkViewModel
             {
@@ -36,6 +36,21 @@ namespace ParkData.Controllers
 
             return View(vm);
         }
+
+
+        public async Task<IActionResult> ParkSearch(string search)
+        {
+            var apiData = new ParkAPI();
+            /* var myData = await apiData.GetParks();*/
+
+            var vm = new ParkViewModel
+            {
+                Parks = await apiData.GetParksWhere(search)
+            };
+
+            return View(vm);
+        }
+
 
         public IActionResult Privacy()
         {

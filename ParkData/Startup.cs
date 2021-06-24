@@ -48,15 +48,20 @@ namespace ParkData
 
             app.UseEndpoints(endpoints =>
             {
-            endpoints.MapControllerRoute(
+                endpoints.MapControllerRoute(
                 name: "search",
                 pattern: "parkdata",
                 defaults: new { Controller = "Home", action = "ParkSearch" });
 
+                endpoints.MapControllerRoute(
+                name: "all",
+                pattern: "parks",
+                defaults: new { Controller = "Home", action = "AllParks" });
+
                 /* parkdata?search=woods*/
 
 
-            endpoints.MapControllerRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

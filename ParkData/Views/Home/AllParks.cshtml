@@ -1,0 +1,24 @@
+﻿
+@model ParkData.ViewModels.ParkViewModel
+
+<p>Here are all the Parks</p>
+
+<table class="table">
+
+    <tr>
+        <th>Park ID</th>
+        <th>Park Name</th>
+        <th>Sanctuary Name</th>
+        <th>Borough</th>
+    </tr>
+    @foreach (var park in Model.Parks)
+    {
+        <tr>
+            <td>@park.ParkID</td>
+            <td>@park.ParkName</td>
+            <td>@park.SantuaryName</td>
+            <td>@park.Borough</td>
+        </tr>
+    }
+
+</table>
