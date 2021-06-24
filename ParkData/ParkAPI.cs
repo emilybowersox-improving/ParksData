@@ -18,7 +18,7 @@ namespace ParkData
             response.EnsureSuccessStatusCode();
 
             string responseContent = await response.Content.ReadAsStringAsync();
-            var parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
+            List<Park> parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
 
             return parkInfo;
         }
@@ -30,18 +30,20 @@ namespace ParkData
 
             /*       var parkOutput = new List<ParkResponse>();*/
 
-            var parkOutput = new List<Park>();
+            List<Park> parkOutput = new List<Park>();
 
             string responseContent = await response.Content.ReadAsStringAsync();
-            var parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
+            List<Park> parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
 
-            foreach (var park in parkInfo)
+            foreach (Park p in parkInfo)
             {
-                if (park.ParkName.Contains(userQuery))
-                {
-                    parkOutput.Add(park);
+                if (p.ParkName.Contains(userQuery)) {
+                    parkOutput.Add(p);
                 }
             }
+
+            /*            return park.ParkName.Contains(userQuery)).ToList();*/
+
 
             return parkOutput;
         }
