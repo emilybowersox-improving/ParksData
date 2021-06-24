@@ -41,7 +41,7 @@ namespace ParkData.Controllers
         public async Task<IActionResult> ParkSearch(string search)
         {
             var apiData = new ParkAPI();
-            /* var myData = await apiData.GetParks();*/
+            var myData = await apiData.GetParks();
 
             var vm = new ParkViewModel
             {

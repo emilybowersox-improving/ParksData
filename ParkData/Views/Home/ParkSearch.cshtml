@@ -3,6 +3,12 @@
 
     <p>This is where the Park Search results go</p>
 
+    <form asp-controller="Home" asp-action="ParkSearch">
+        <input type="text" name="search" placeholder="Search the parks!">
+        <input type="submit" id="searchButton">
+    </form>
+
+
     <table class="table">
 
         <tr>
@@ -22,8 +28,8 @@
                 <td>@park.ParkName</td>
                 <td>@park.Borough</td>
                 <td>@park.Acres</td>
-                <td>@park.Directions</td>
-                <td>@park.Description</td>
+                <td>@Html.Raw(park.Directions)</td>
+                <td>@Html.Raw(park.Description)</td>
                 <td>@park.HabitatType</td>
                 <td>@park.SantuaryName</td>
             </tr>
