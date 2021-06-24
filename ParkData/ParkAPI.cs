@@ -28,10 +28,12 @@ namespace ParkData
             HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
             response.EnsureSuccessStatusCode();
 
-            string responseContent = await response.Content.ReadAsStringAsync();
-            var parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
+            /*       var parkOutput = new List<ParkResponse>();*/
 
             var parkOutput = new List<Park>();
+
+            string responseContent = await response.Content.ReadAsStringAsync();
+            var parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
 
             foreach (var park in parkInfo)
             {
