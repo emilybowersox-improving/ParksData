@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using ParkData.Models;
 using ParkData.ViewModels;
@@ -13,6 +14,7 @@ namespace ParkData.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+       /* private readonly IMemoryCache _cache;*/
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -27,7 +29,7 @@ namespace ParkData.Controllers
         public async Task<IActionResult> AllParks()
         {
             var apiData = new ParkAPI();
-/*            var myData = await apiData.GetParks();*/
+            /*            var myData = await apiData.GetParks();*/
 
             var vm = new ParkViewModel
             {
@@ -41,7 +43,7 @@ namespace ParkData.Controllers
         public async Task<IActionResult> ParkSearch(string search)
         {
             var apiData = new ParkAPI();
-            var myData = await apiData.GetParks();
+            /*       var myData = await apiData.GetParks();*/
 
             var vm = new ParkViewModel
             {
@@ -51,6 +53,13 @@ namespace ParkData.Controllers
             return View(vm);
         }
 
+        /*      public async Task<IAsyncResult> ParkInfo(string search)
+      {
+          var data = await_parkDataClient.Get(search);
+
+          return Json(data);
+      }
+*/
 
         public IActionResult Privacy()
         {
