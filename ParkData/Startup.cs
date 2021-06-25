@@ -25,6 +25,7 @@ namespace ParkData
         {
             services.AddControllersWithViews();
             services.AddMemoryCache();
+            services.AddSingleton<ParkAPI>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

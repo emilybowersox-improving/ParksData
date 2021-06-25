@@ -14,11 +14,14 @@ namespace ParkData.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-       /* private readonly IMemoryCache _cache;*/
+        private readonly IMemoryCache _cache;
+        private ParkAPI _parkAPI;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMemoryCache memoryCache, ParkAPI parkAPI)
         {
             _logger = logger;
+            _cache = memoryCache;
+            _parkAPI = parkAPI;
         }
 
         public IActionResult Index()
@@ -26,10 +29,24 @@ namespace ParkData.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AllParks()
+        public IActionResult AllParks()
+        {
+          /*  var apiData = new ParkAPI(_cache);*/
+/*            var myData = await apiData.GetParks();*/
+
+            var vm = new ParkViewModel
+            {
+                Parks = _parkAPI.CheckCache()
+            };
+
+            return View(vm);
+        }
+
+
+/*        public async Task<IActionResult> AllParks()
         {
             var apiData = new ParkAPI();
-            /*            var myData = await apiData.GetParks();*/
+            *//*            var myData = await apiData.GetParks();*//*
 
             var vm = new ParkViewModel
             {
@@ -38,16 +55,16 @@ namespace ParkData.Controllers
 
             return View(vm);
         }
-
+*/
 
         public async Task<IActionResult> ParkSearch(string search)
         {
-            var apiData = new ParkAPI();
+           /* var apiData = new ParkAPI();*/
             /*       var myData = await apiData.GetParks();*/
 
             var vm = new ParkViewModel
             {
-                Parks = await apiData.GetParksWhere(search)
+                Parks = await _parkAPI.GetParksWhere(search)
             };
 
             return View(vm);
