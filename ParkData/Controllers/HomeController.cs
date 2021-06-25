@@ -31,9 +31,6 @@ namespace ParkData.Controllers
 
         public IActionResult AllParks()
         {
-          /*  var apiData = new ParkAPI(_cache);*/
-/*            var myData = await apiData.GetParks();*/
-
             var vm = new ParkViewModel
             {
                 Parks = _parkAPI.CheckCache()
@@ -42,33 +39,16 @@ namespace ParkData.Controllers
             return View(vm);
         }
 
-
-/*        public async Task<IActionResult> AllParks()
+        public IActionResult ParkSearch(string search)
         {
-            var apiData = new ParkAPI();
-            *//*            var myData = await apiData.GetParks();*//*
-
             var vm = new ParkViewModel
             {
-                Parks = await apiData.GetParks()
+                Parks = _parkAPI.GetParksWhere(search)
             };
 
             return View(vm);
         }
-*/
 
-        public async Task<IActionResult> ParkSearch(string search)
-        {
-           /* var apiData = new ParkAPI();*/
-            /*       var myData = await apiData.GetParks();*/
-
-            var vm = new ParkViewModel
-            {
-                Parks = await _parkAPI.GetParksWhere(search)
-            };
-
-            return View(vm);
-        }
 
         /*      public async Task<IAsyncResult> ParkInfo(string search)
       {

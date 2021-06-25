@@ -11,21 +11,16 @@ namespace ParkData
     public class ParkAPI
     {
 
-
         private static readonly HttpClient _httpClient = new HttpClient();
         private readonly IMemoryCache _cache;
-
 
         public ParkAPI(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
         }
 
-
-
         private string GetParkResponse()
         {
-
             HttpResponseMessage response = _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks").Result;
             response.EnsureSuccessStatusCode();
             string responseContent = response.Content.ReadAsStringAsync().Result;
@@ -33,10 +28,8 @@ namespace ParkData
             return responseContent;
         }
 
-
         public List<Park> CheckCache()
-        {
-
+        { 
             List<Park> parksFromCache;
           /*  "Park" = CacheKey.Entry */
             if (!_cache.TryGetValue("Park", out parksFromCache))
@@ -51,77 +44,23 @@ namespace ParkData
         }
 
 
-
-        /*        public async Task<List<Park>> GetParks()
-          {
-              HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
-              response.EnsureSuccessStatusCode();
-
-              string responseContent = await response.Content.ReadAsStringAsync();
-              List<Park> parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
-
-              return parkInfo;
-          }
-  */
-
-
-/*        public async Task<List<Park>> GetParks()
+        public List<Park> GetParksWhere(string userQuery)
         {
-            const string Key = "park";
-            List<Park> cacheValue;
-
-            if (!this.memoryCache.TryGetValue(Key, out cacheValue))
-            {
-
-                HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
-                response.EnsureSuccessStatusCode();
-
-                string responseContent = await response.Content.ReadAsStringAsync();
-                cacheValue = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
-
-                var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(20));
-
-                this.memoryCache.Set(Key, cacheValue, cacheEntryOptions);
-
-            }
-            return cacheValue;
-        }*/
-
-
-
-        /*        public async Task<List<Park>> GetParks()
-                {
-                    HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
-                    response.EnsureSuccessStatusCode();
-
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    List<Park> parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
-
-                    return parkInfo;
-                }
-        */
-
-
-        public async Task<List<Park>> GetParksWhere(string userQuery)
-        {
-            HttpResponseMessage response = await _httpClient.GetAsync("https://seriouslyfundata.azurewebsites.net/api/parks");
-            response.EnsureSuccessStatusCode();
-
             List<Park> parkOutput = new List<Park>();
 
-            string responseContent = await response.Content.ReadAsStringAsync();
-            List<Park> parkInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Park>>(responseContent);
+            List<Park> parkInfo = CheckCache();
 
             foreach (Park p in parkInfo)
             {
-                if (p.ParkName.ToLower().Contains(userQuery) || p.Description.ToLower().Contains(userQuery))
+                if (p.ParkName.ToLower().Contains(userQuery.ToLower()) || p.Description.ToLower().Contains(userQuery.ToLower()))
                 {
                     parkOutput.Add(p);
                 }
             }
-
-    
             return parkOutput;
         }
+
     }
 }
+
+
